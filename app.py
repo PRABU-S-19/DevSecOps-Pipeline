@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-API_KEY = "sk_test_123456789SECRET"
+
 
 @app.route("/")
 def home():
