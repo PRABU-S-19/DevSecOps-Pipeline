@@ -9,11 +9,17 @@ pipeline {
                     def result = sh(script: "grep -r 'API_KEY' . || true", returnStdout: true)
 
                     if (result.trim()) {
-                        error "❌ Secret Detected in Code!"
+                        error "Secret Detected in Code!"
                     } else {
-                        echo "✅ No Secrets Found"
+                        echo "No Secrets Found"
                     }
                 }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t devsecops-app .'
             }
         }
 
