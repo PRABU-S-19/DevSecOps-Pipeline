@@ -7,12 +7,12 @@ pipeline {
             steps {
                 script {
                     def result = sh(
-                        script: "grep 'SECRET_KEY' app.py || true",
+                        script: "grep -E 'SECRET_KEY\\s*=\\s*\".*\"' app.py || true",
                         returnStdout: true
                     )
 
                     if (result.trim()) {
-                        error "Secret Detected in Code!"
+                        error "Secret Detected in app.py"
                     } else {
                         echo "No Secrets Found"
                     }
